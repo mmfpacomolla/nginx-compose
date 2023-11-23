@@ -1,0 +1,9 @@
+version: "3.9"
+services:
+  my_app_php:
+    build: .
+    volumes:
+      - ./app:/var/www/html/app
+      - ./config/virtualhosts:/etc/nginx/sites-enabled
+    ports:
+      - "8080:80"
