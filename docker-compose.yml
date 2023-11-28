@@ -1,9 +1,19 @@
 version: "3.9"
 services:
-  my_app_php:
+  app1:
     build: .
     volumes:
       - ./app:/var/www/html/app
       - ./config/virtualhosts:/etc/nginx/sites-enabled
     ports:
       - "8080:80"
+    links:
+      - db1
+  db1:
+    image: mysql:8.0.35-debian
+    ports: 
+      - "3307:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=database-inicial
+
