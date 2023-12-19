@@ -1,14 +1,5 @@
 version: "3.9"
 services:
-  app:
-    build: .
-    volumes:
-      - ./app:/var/www/html/app
-      - ./config/virtualhosts:/etc/nginx/sites-enabled
-    ports:
-      - "8080:80"
-    links:
-      - db
   db:
     image: mysql:8.0.35-debian
     ports: 
@@ -18,4 +9,16 @@ services:
       - MYSQL_USER=dbuser
       - MYSQL_PASSWORD=dbuser
       - MYSQL_DATABASE=database-inicial
-
+    volumes:
+      - mysql-data:/var/lib/mysql #Opcional
+  app:
+    build: .
+    volumes:
+      - ./app:/var/www/html/app
+      - ./config/virtualhosts:/etc/nginx/sites-enabled
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+volumes:
+  mysql-data: #Opcional (si queremos mantener los datos de la base de datos)
