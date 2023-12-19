@@ -1,6 +1,6 @@
 version: "3.9"
 services:
-  app1:
+  app:
     build: .
     volumes:
       - ./app:/var/www/html/app
@@ -8,12 +8,14 @@ services:
     ports:
       - "8080:80"
     links:
-      - db1
-  db1:
+      - db
+  db:
     image: mysql:8.0.35-debian
     ports: 
       - "3307:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_USER=dbuser
+      - MYSQL_PASSWORD=dbuser
       - MYSQL_DATABASE=database-inicial
 
