@@ -4,6 +4,6 @@ services:
     build: .
     volumes:
       - ./app:/var/www/html/app
-      - ./config/virtualhosts:/etc/nginx/sites-enabled
+      - ./config/virtualhosts/web1.com:/etc/nginx/sites-enabled/web1.com
     ports:
       - "8080:80"
